@@ -3,7 +3,7 @@
 2. To be able to load the ingested data into a database of your choice
 3. Export the data to a CSV file
 
-# DATA:
+# Data:
 
 TIME_SERIES_DAILY API returns raw (as-traded) daily time series (date, daily open, daily high, daily low, daily close, daily volume) of the global equity specified, covering 20+ years of historical data. (Link: https://www.alphavantage.co/documentation/#daily)
 
@@ -22,3 +22,8 @@ By default, datatype=json. Strings json and csv are accepted with the following 
 
 ❚ Required: apikey
 Your API key.
+
+## Tools used:
+
+MySQL Ver 8.0.29 for macos12.2 on x86_64 (using Homebrew)
+Python Libraries (requests, pandas, sqlalchemy )
