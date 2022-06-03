@@ -1,32 +1,41 @@
 import requests
 import pandas as pd
-import getpass
 
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=$stocks_apikey'
+
+url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=$stocks_apikey&outputsize=full'
 r = requests.get(url)
 data = r.json()
 
-print('Keys:', data.keys())
+print('--------------- \n Json Keys \n---------------')
 
-print('Meta Data:', data['Meta Data'])
+print(data.keys())
 
+print('--------------- \n Meta Data \n---------------')
+print(data['Meta Data'])
+
+print('--------------- \n Converting the Dictionary to Data Frame \n---------------')
 df = pd.DataFrame.from_dict(data['Time Series (Daily)'], orient = "index")
 df = df.reset_index(level=0)
 df.columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Volume']
 
+print('--------------- \n Data Frame Head\n---------------')
 print(df.head())
 
-# Import dataframe into MySQL
+
+print('--------------- \n Importing dataframe into MySQL\n---------------')
+
 import sqlalchemy
 
-database_username = input('Enter DB Username')
-database_password = input('Enter DB password')
+print('--------------- \n Connecting to DB\n---------------')
+database_username = input('Enter DB Username: ')
+database_password = input('Enter DB password: ')
 database_ip       = "127.0.0.1"
-database_name     = "stock_data"
+database_name     = "stocks_data"
 database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{2}/{3}'.
                                                format(database_username, database_password, 
                                                       database_ip, database_name))
 df.to_sql(con=database_connection, name='reliance_data', if_exists='replace')
+print('--------------- \n Import Successful\n---------------')
 
 
 sql_query = sqlalchemy.text("SELECT * FROM reliance_data")
