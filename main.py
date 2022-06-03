@@ -1,7 +1,8 @@
 import requests
 import pandas as pd
+import getpass
 
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=OPTQ1LNJ9RQTYTKM'
+url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=$stocks_apikey'
 r = requests.get(url)
 data = r.json()
 
@@ -17,10 +18,11 @@ print(df.head())
 
 # Import dataframe into MySQL
 import sqlalchemy
-database_username = 'root'
-database_password = 'password'
-database_ip       = '127.0.0.1'
-database_name     = 'stock_data'
+
+database_username = input('Enter DB Username')
+database_password = input('Enter DB password')
+database_ip       = "127.0.0.1"
+database_name     = "stock_data"
 database_connection = sqlalchemy.create_engine('mysql+mysqlconnector://{0}:{1}@{2}/{3}'.
                                                format(database_username, database_password, 
                                                       database_ip, database_name))
