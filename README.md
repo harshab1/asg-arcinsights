@@ -27,3 +27,11 @@ Your API key.
 
 MySQL Ver 8.0.29 for macos12.2 on x86_64 (using Homebrew)
 Python Libraries (requests, pandas, sqlalchemy )
+
+## Steps involved
+
+1. Firstly, MySQL database is setup using the 'database-setup.bash'. This scripts should have executable permissions (chmod +x path/to/script/database-setup.bash). When its executed, password and other required configurations are specified. It will create a database 'stocks_data'
+2. Then, main.py is executed. In this, the stocks data is obtained by specifying the stock code and the exchange its listed on along with api key and other required/optinal parameters. Using this method, I have obtained the data for  RELIANCE stock listed on BSE for the last 20 years. 
+3. Then the data in the dict format is converted to dataframe using pandas. 
+4. Using sqlalchemy library, connection is established between python amd local mysql database. Then, the dataframe is loaded into the database table.
+5. Finally, the dataframe is saved in the csv format.
