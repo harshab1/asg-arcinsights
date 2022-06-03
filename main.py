@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 
-
 url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=$stocks_apikey&outputsize=full'
 r = requests.get(url)
 data = r.json()
@@ -38,6 +37,7 @@ df.to_sql(con=database_connection, name='reliance_data', if_exists='replace')
 print('--------------- \n Import Successful\n---------------')
 
 
+print('--------------- \n Printing Database\n---------------')
 sql_query = sqlalchemy.text("SELECT * FROM reliance_data")
 result = database_connection.execute(sql_query)
 result_as_list = result.fetchall()
@@ -46,3 +46,7 @@ print('Table: Reliance Data')
 print('------------------')
 for row in result_as_list:
     print(row)
+
+
+print('--------------- \n Exporting Data to CSV file\n---------------')
+df.to_csv('reliance-data.csv')
