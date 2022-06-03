@@ -25,8 +25,8 @@ Your API key.
 
 ## Tools used:
 
-MySQL Ver 8.0.29 for macos12.2 on x86_64 (using Homebrew)
-Python Libraries (requests, pandas, sqlalchemy )
+1. MySQL Ver 8.0.29 for macos12.2 on x86_64 (using Homebrew)
+2. Python Libraries (requests, pandas, sqlalchemy )
 
 ## Steps involved
 
