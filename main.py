@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=$stocks_apikey&outputsize=full'
+url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=RELIANCE.BSE&apikey=$api_key&outputsize=full'
 r = requests.get(url)
 data = r.json()
 
@@ -11,6 +11,8 @@ print(data.keys())
 
 print('--------------- \n Meta Data \n---------------')
 print(data['Meta Data'])
+
+# print(data['Time Series (Daily)'])
 
 print('--------------- \n Converting the Dictionary to Data Frame \n---------------')
 df = pd.DataFrame.from_dict(data['Time Series (Daily)'], orient = "index")
